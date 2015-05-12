@@ -1,0 +1,66 @@
+<head><script src="{{ url_for('static', filename='index.js') }}"></script></head>
+<body onload="hide()"></body>
+{% extends "base.html" %}
+<title>{{title}}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container-fluid">
+ 
+  <div class="row">
+    <div class="col-md-2" style="background-color:lavender;">
+    </div>
+<div class=" col-md-8" style="background-color:lavenderblush;">
+
+
+
+<div align='center'><span style="color: red;float:center;">{{error}}</span>
+    {%if not current_user.is_authenticated()%}
+	<span style="color: red;text-align:center;">Sign in to add details</span></div>{%endif%}
+{%for post in posts%}<form action="" method="post" name="post">{{ form.hidden_tag() }}
+<div align='left'><input name="postid" value="{{post[0]}}" style="display:None"></input>
+<h2><a href="/{{post[2]}}">{{post[2]}}</a></h2>{{post[3]}}<br><br>Published On : {{post[4]}}</div>
+<div align='left'><hr>Comments:<br>
+{%for comment in comments%}
+	{%if post[0]==comment[2]%}<hr>
+	{{comment[1]}} says:<br><br>{{comment[3]}}<hr>
+	{%endif%}
+{%endfor%}<br>
+<textarea name="commentbox" type="text" style="height:100px;width=200px;" required></textarea><input name="comment" type="submit"class="btn-large btn-danger" value="comment"></div><hr></form>
+{%endfor%}
+<hr>
+{%if current_user.is_authenticated()%}
+	<form action="" method="post" name="post">
+	{{ form.hidden_tag() }}
+	title{{form.title(value='',height=34,width=111)}}<br>
+	body{{form.body(value='')}}
+	<p><input name="submit" type="submit"  value="submit"></p>
+	</form>
+{%endif%}
+
+
+
+   
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>
+
+
+{% endblock %}

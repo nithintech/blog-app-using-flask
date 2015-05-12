@@ -1,0 +1,20 @@
+<head><script src="{{ url_for('static', filename='index.js') }}"></script></head>
+<body onload="hide()"></body>
+{% extends "base.html" %}
+<title>{{title}}
+{% block content %}
+<div align='center'><span style="color: red;float:center;">{{error}}</span>
+    {%if not current_user.is_authenticated()%}
+        <span style="color: red;text-align:center;">Sign in to add details</span></div>{%endif%}
+{%for post in posts%}<form action="" method="post" name="post">
+<div align='left'><input name="postid" value="{{post[0]}}" style="display:None"></input>
+<h2><a href="/{{post[2]}}">{{post[2]}}</a></h2>{{post[3]}}<br><br>Published On : {{post[4]}}</div>
+<div align='left'><hr>Comments:<br>
+{%for comment in comments%}
+        {%if post[0]==comment[2]%}<hr>
+        {{comment[1]}} says:<br><br>{{comment[3]}}<hr>
+        {%endif%}
+{%endfor%}<br>{%if current_user.is_authenticated()%}
+<textarea name="commentbox" type="text" style="height:100px;width=200px;" required></textarea><input name="comment" type="submit" value="comment"></div><hr>{%endif%}</form>
+{%endfor%}
+{% endblock %}

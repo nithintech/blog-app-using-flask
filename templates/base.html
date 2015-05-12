@@ -1,0 +1,36 @@
+<style>
+h1 {color:blue;font-size:20pt;}
+p {color:green; font-size:16pt;}
+s1{color: green; font-size: 15pt;}
+</style>
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - StudentApp</title>
+    {% else %}
+    <title>BLOG APPLICATION</title>
+    {% endif %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<h1 size="56" align='center' ><a href="/index">BLOG APPLICATION</a>
+ <s1 style="float:right;">    {% if current_user.is_authenticated() %}
+        {{current_user.username}}<a href="/logout"> Logout</a>
+{% elif current_user.is_anonymous() %}
+        Guest<a align='right' href="/login"> Login</a><br><a href="/register">&nbsp;&nbsp;&nbsp;Register&nbsp;&nbsp;</a>
+{% endif %}</s1><br></h1>{%if current_user.is_authenticated() and not current_user.confirm%}<div style="color: red;text-align:right;" size="20">please confirm your email</div>{%endif%}
+	<hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</html>

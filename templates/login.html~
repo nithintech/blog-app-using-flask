@@ -1,0 +1,57 @@
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='button.js') }}"></script></head>
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+ 
+  <div class="row">
+    <div class="col-md-2" style="background-color:lavender;">
+    </div>
+<div class=" col-md-8" style="background-color:lavenderblush;">
+ <form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+	{% if error!=None %}
+		<span style="color:red;">{{error}}</span>
+	{%endif%}<hr>Username:<br>
+		
+        {{ form.username(size=26.2,tabindex=1) }}
+        {% for error in form.username.errors %}
+          <span style="color: red;">[{{error}}]</span>
+	
+        {% endfor %}<br>Password:<br>
+ {{ form.password(size=22,tabindex=2) }}
+      
+        {% for error in form.password.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    {{ form.rememberme(tabindex=3)}} Remember Me<br><span style="color: blue;"><a href='/forgotpassword'>Forgot Password</a></span>
+    <p><input type="submit" value="Sign In" class="btn-small btn-info" tabindex=4></p>
+ </form><hr></div>
+
+
+
+
+   
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>
+
+{% endblock %}

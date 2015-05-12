@@ -1,0 +1,47 @@
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='button.js') }}"></script></head>
+{% extends "base.html" %}
+{% block content %}
+{% if error %}
+<span style="color: red;">{{error}}</span>
+{%endif%}
+
+ <div class="container-fluid">
+  <h1>Hello World!</h1>
+  <p>Resize the browser window to see the effect.</p>
+  <div class="row">
+    <div class="col-md-2" style="background-color:lavender;">
+      
+    </div>
+<div class=" col-md-8" style="background-color:lavenderblush;">
+ <form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+      Email:<br>{{ form.email(size=26.2,tabindex=1) }}{% for error in form.email.errors %}<span style="color: red;">[{{error}}]</span>{% endfor %}<br>
+Password:<br>{{ form.password(size=22,tabindex=2) }}
+      {% for error in form.password.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+ConfirmPassword:<br>{{ form.rptpassword(size=22,tabindex=3) }}
+       {% for error in form.rptpassword.errors %}<span style="color: red;">[{{error}}]</span>
+        {% endfor %}
+<br>Username:<br>{{ form.username(size=26.2,tabindex=4) }}
+{% for error in form.username.errors %}
+          <span style="color: red;">[{{error}}]</span>
+{% endfor %}<br>
+    <p><input type="submit" value="Sign Up"class="btn-small btn-danger" tabindex=5></p>
+ </form><hr></div>
+
+
+
+
+    <div></div>
+      
+    </div>
+  </div>
+</div>
+    
+</body>
+</html>
+
+{% endblock%}
